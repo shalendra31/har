@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Connect – Dashboard (Interactive Map)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    #map {
+      width: 100%;
+      height: 400px;
+    }
+
+    .marker {
+      background-color: red;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+    }
+
+    .mapboxgl-popup {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-left">
+      <div class="logo">
+        <div class="logo-icon">▦</div> <a href="dashboard.html">AI Connect</a>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="#">Tools</a>
+        <a href="#">Marketplace</a>
+      </nav>
+    </div>
+    <div class="navbar-right">
+      <span>❔</span>
+      <span>🔔</span>
+      <a href="login.html">👤</a>
+    </div>
+  </div>
+
+  <div id="map"></div>
+  <div class="service-panel">
+    <div class="service-header">
+      <h2>Service Overview</h2>
+      <select class="status-filter" onchange="filterStatus(this.value)">
+        <option value="all">All</option>
+        <option value="up">Only UP</option>
+        <option value="down">Only DOWN</option>
+      </select>
+    </div>
+    <div class="service-grid">
+      <div class="status-box up">
+        <h3>Ports</h3>
+        <div class="status-value status-up">4</div>
+        <div class="status-down">DOWN</div>
+      </div>
+      <div class="status-box up">
+        <h3>MCRs</h3>
+        <div class="status-value status-up">1</div>
+        <div class="status-down">DOWN</div>
+      </div>
+      <div class="status-box up">
+        <h3>MVEs</h3>
+        <div class="status-value status-up">0</div>
+        <div class="status-down">DOWN</div>
+      </div>
+      <div class="status-box up">
+        <h3>VXCs</h3>
+        <div class="status-value status-up">3</div>
+        <div class="status-down">DOWN</div>
+      </div>
+      <div class="status-box up">
+        <h3>IXs</h3>
+        <div class="status-value status-up">0</div>
+        <div class="status-down">DOWN</div>
+      </div>
+    </div>
+  </div>
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibW9ja2FwaWtleSIsImEiOiJja3VubGV2YjMwMXJjMnBvMmQzZzFxNmtkIn0.7M0uXZn3XR5bSmx3p6FYig';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/dark-v11',
+      center: [10, 20],
+      zoom: 1.2
+    });
+
+    const locations = [
+      { name: 'Dallas', coords: [-96.7970, 32.7767] },
+      { name: 'Frankfurt', coords: [8.6821, 50.1109] },
+      { name: 'Tokyo', coords: [139.6917, 35.6895] },
+      { name: 'Singapore', coords: [103.8198, 1.3521] },
+      { name: 'Sydney', coords: [151.2093, -33.8688] },
+      { name: 'Los Angeles', coords: [-118.2437, 34.0522] },
+      { name: 'Miami', coords: [-80.1918, 25.7617] }
+    ];
+
+    locations.forEach(loc => {
+      const el = document.createElement('div');
+      el.className = 'marker';
+      new mapboxgl.Marker(el)
+        .setLngLat(loc.coords)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(loc.name))
+        .addTo(map);
+    });
+  </script>
+
+</body>
+</html>

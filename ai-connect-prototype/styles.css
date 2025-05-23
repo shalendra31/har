@@ -1,0 +1,101 @@
+
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.service-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.card-header {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.card-metric {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.card-metric span {
+  display: block;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.card-status {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+.card-status.green {
+  color: #28a745;
+}
+
+.card-status.yellow {
+  color: #ffc107;
+}
+
+.card-status.gray {
+  color: #6c757d;
+}
+
+.performance-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.performance-metrics > div {
+  font-size: 0.95rem;
+}
+
+.performance-metrics strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.performance-metrics span {
+  font-weight: bold;
+}
+
+.service-health .health-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.status-tag {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.status-tag.active {
+  background: #d1f0d1;
+  color: #007f00;
+}
+
+.status-tag.warning {
+  background: #fff3cd;
+  color: #856404;
+}

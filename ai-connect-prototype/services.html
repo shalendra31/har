@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Service Status – AI Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-left">
+      <div class="logo">
+        <img src="logo.png" alt="Verizon AI Connect" />
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="#">Tools</a>
+        <a href="#">Marketplace</a>
+      </nav>
+    </div>
+    <div class="navbar-right">
+      <span>❔</span>
+      <span>🔔</span>
+      <a href="login.html">👤</a>
+    </div>
+  </div>
+
+  <div class="service-status-page">
+    <button class="back-button">← Back</button>
+    <h2>Service Status</h2>
+
+    <div class="service-cards">
+      <div class="service-card">
+        <div class="card-header">Ports</div>
+        <div class="card-metric">4 <span>Total</span></div>
+        <div class="card-status green">📈 98.5% Available</div>
+      </div>
+      <div class="service-card">
+        <div class="card-header">Connections</div>
+        <div class="card-metric">3 <span>Active</span></div>
+        <div class="card-status green">✅ 2 Healthy</div>
+        <div class="card-status yellow">⚠️ 1 Warning</div>
+      </div>
+      <div class="service-card">
+        <div class="card-header">Cloud Routers</div>
+        <div class="card-metric">1 <span>Deployed</span></div>
+        <div class="card-status green">✓ All Systems Operational</div>
+      </div>
+      <div class="service-card">
+        <div class="card-header">Virtual Edges</div>
+        <div class="card-metric">0 <span>Instances</span></div>
+        <div class="card-status gray">🙈 No Instances Deployed</div>
+      </div>
+    </div>
+
+    <div class="performance-panel">
+      <h3>Network Performance</h3>
+      <div class="performance-metrics">
+        <div><strong>Average Latency</strong><br><span class="green">8.5ms</span></div>
+        <div><strong>Packet Loss</strong><br><span class="green">0.01%</span></div>
+        <div><strong>Bandwidth Utilization</strong><br><span class="yellow">45.2%</span></div>
+        <div><strong>Network Uptime</strong><br><span class="green">99.999%</span></div>
+      </div>
+    </div>
+
+    <div class="service-health">
+      <h3>Service Health</h3>
+      <div class="health-item">
+        <div>
+          <strong>NY to AWS East</strong><br>
+          <small>New York Metro → AWS US-East-1</small>
+        </div>
+        <div class="status-tag active">10G Active</div>
+      </div>
+      <div class="health-item warning">
+        <div>
+          <strong>SFO to AWS West</strong><br>
+          <small>Silicon Valley → AWS US-West-2</small>
+        </div>
+        <div class="status-tag warning">100G Warning</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
