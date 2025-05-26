@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Connect – Dashboard (Search Enabled)</title>
+  <title>AI Connect – Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -12,7 +11,7 @@
   <style>
     #map {
       width: 100%;
-      height: 400px;
+      height: 550px;
     }
 
     .leaflet-popup-content {
@@ -22,76 +21,136 @@
 
     .custom-marker {
       background-color: #8B0000;
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       border: 2px solid #fff;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 6px rgba(255, 0, 0, 0.4);
+    }
+
+    .leaflet-control-geocoder-form input {
+      height: 40px;
+      font-size: 1rem;
+      border-radius: 8px;
+    }
+
+    .service-panel {
+      background: white;
+      padding: 1.5rem;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.1);
+      margin-top: -40px;
+      position: relative;
+      z-index: 999;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .status-box {
+      background: #f9f9f9;
+      border-radius: 12px;
+      text-align: center;
+      padding: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .status-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .status-state.up {
+      color: green;
+      font-size: 0.85rem;
+    }
+
+    .status-state.down {
+      color: #b00000;
+      font-size: 0.85rem;
+    }
+
+    .status-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #ccc;
+      margin: 0.5rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .service-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="navbar">
-    <div class="navbar-left">
-      <div class="logo">
-        <img src="logo.png" alt="Verizon AI Connect" /> 
-      </div>
-      <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="services.html">Services</a>
-        <a href="#">Tools</a>
-        <a href="#">Marketplace</a>
-      </nav>
-    </div>
-    <div class="navbar-right">
-      <span>❔</span>
-      <span>🔔</span>
-      <a href="login.html">👤</a>
-    </div>
-  </div>
+<!-- Include header.html -->
+<div id="header-placeholder"></div>
+<script>
+  fetch('header.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    })
+    .catch(error => {
+      console.error('Error loading header:', error);
+    });
+</script>
 
   <div id="map"></div>
-  
-<div class="service-panel">
-  <div class="service-header">
-    <h2>Service Overview</h2>
-    <button class="status-button">⚡ Service Status</button>
-  </div>
-  <div class="service-grid circle-style">
-    <div class="status-box">
-      <div class="status-label">Ports</div>
-      <div class="status-state up">UP: 3</div>
-      <div class="status-circle">4</div>
-      <div class="status-state down">DOWN: 1</div>
-    </div>
-    <div class="status-box">
-      <div class="status-label">MCRs</div>
-      <div class="status-state up">UP: 1</div>
-      <div class="status-circle">1</div>
-      <div class="status-state down">DOWN: 0</div>
-    </div>
-    <div class="status-box">
-      <div class="status-label">MVEs</div>
-      <div class="status-state up">UP: 0</div>
-      <div class="status-circle">0</div>
-      <div class="status-state down">DOWN: 0</div>
-    </div>
-    <div class="status-box">
-      <div class="status-label">VXCs</div>
-      <div class="status-state up">UP: 3</div>
-      <div class="status-circle">3</div>
-      <div class="status-state down">DOWN: 0</div>
-    </div>
-    <div class="status-box">
-      <div class="status-label">IXs</div>
-      <div class="status-state up">UP: 0</div>
-      <div class="status-circle">0</div>
-      <div class="status-state down">DOWN: 0</div>
-    </div>
-  </div>
-</div>
 
+  <div class="service-panel">
+    <div class="service-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="margin: 0;">Service Overview</h2>
+      <a href="servicesStatus.html" class="status-button">⚡ Service Status</a>
+    </div>
+    <div class="service-grid">
+      <div class="status-box">
+        <div class="status-label">Ports</div>
+        <div class="status-state up">UP: 3</div>
+        <div class="status-circle">4</div>
+        <div class="status-state down">DOWN: 1</div>
+      </div>
+      <div class="status-box">
+        <div class="status-label">MCRs</div>
+        <div class="status-state up">UP: 1</div>
+        <div class="status-circle">1</div>
+        <div class="status-state down">DOWN: 0</div>
+      </div>
+      <div class="status-box">
+        <div class="status-label">MVEs</div>
+        <div class="status-state up">UP: 0</div>
+        <div class="status-circle">0</div>
+        <div class="status-state down">DOWN: 0</div>
+      </div>
+      <div class="status-box">
+        <div class="status-label">VXCs</div>
+        <div class="status-state up">UP: 3</div>
+        <div class="status-circle">3</div>
+        <div class="status-state down">DOWN: 0</div>
+      </div>
+      <div class="status-box">
+        <div class="status-label">IXs</div>
+        <div class="status-state up">UP: 0</div>
+        <div class="status-circle">0</div>
+        <div class="status-state down">DOWN: 0</div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
@@ -99,14 +158,12 @@
     const map = L.map('map').setView([20, 10], 2);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap &copy; CartoDB',
+      attribution: 'Verizon',
       subdomains: 'abcd',
       maxZoom: 19
     }).addTo(map);
 
-    L.Control.geocoder({
-      defaultMarkGeocode: true
-    }).addTo(map);
+    L.Control.geocoder({ defaultMarkGeocode: true }).addTo(map);
 
     const locations = [
       { name: 'Dallas', coords: [32.7767, -96.7970] },
@@ -131,6 +188,5 @@
         .bindPopup(`<strong>${loc.name}</strong>`);
     });
   </script>
-
 </body>
 </html>
